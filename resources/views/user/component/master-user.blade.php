@@ -23,12 +23,14 @@
 <link href="{{ asset('shop/themes/css/font-awesome.css') }}" rel="stylesheet" type="text/css">
 <!-- Google-code-prettify -->
 <link href="{{ asset('shop/themes/js/google-code-prettify/prettify.css') }}" rel="stylesheet"/>
+
 <!-- fav and touch icons -->
 <link rel="shortcut icon" href="{{ asset('shop/themes/images/ico/favicon.ico') }}">
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ asset('shop/themes/images/ico/apple-touch-icon-144-precomposed.png') }}">
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('shop/themes/images/ico/apple-touch-icon-114-precomposed.png') }}">
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('shop/themes/images/ico/apple-touch-icon-72-precomposed.png') }}">
 <link rel="apple-touch-icon-precomposed" href="{{ asset('shop/themes/images/ico/apple-touch-icon-57-precomposed.png') }}">
+<link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 <style type="text/css" id="enject"></style>
 </head>
 <body>
@@ -81,6 +83,7 @@
             </li>
             @else
             <li class=""><a href="contact.html">Profile</a></li>
+            <li class=""><a href="{{ route('orderhistory') }}">Order History</a></li>
             <li class=""><a href="{{ route('confirm-payment') }}">Confirm Payment</a></li>
             <li class="">
               <a href="{{ route('logout') }}" role="button" style="padding-right:0"><span class="btn btn-large btn-success">Logout</span></a>
@@ -136,9 +139,11 @@
   <script src="{{ asset('shop/themes/js/jquery.js') }}" type="text/javascript"></script>
   <script src="{{ asset('shop/themes/js/bootstrap.min.js') }}" type="text/javascript"></script>
   <script src="{{ asset('shop/themes/js/google-code-prettify/prettify.js') }}"></script>
-
+  <script src="{{ asset('bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
   <script src="{{ asset('shop/themes/js/bootshop.js') }}"></script>
   <script src="{{ asset('shop/themes/js/jquery.lightbox-0.5.js') }}"></script>
+  <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
   @yield('custom-script')
   <script>
     $.ajaxSetup({

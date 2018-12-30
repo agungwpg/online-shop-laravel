@@ -83,7 +83,7 @@
 @stop
 @section('custom-script')
 <script>
-var flag = 1;
+var flag = 0;
 
 $(".btn-register").click(function(e){
   if($("#txtpassword").val() != $("#txtrepassword").val())

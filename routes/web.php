@@ -79,6 +79,9 @@ Route::get('confirm-payment',function(){
 
 
 Route::post('doconfirmpayment','ShopController@doconfirm')->name('doconfirm');
+Route::get('orderhistory',function(){
+  return view('user.myshop.orderhistory');
+})->name('orderhistory');
 //-----------------------cashier-------------------
 
 Route::get('cashier',function(){
