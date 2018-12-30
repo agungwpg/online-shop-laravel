@@ -10,7 +10,7 @@
       <li class="span3">
         <div class="thumbnail">
           <div style="width:100px;height:100px;margin-left: auto; margin-right: auto;">
-            <a href="{{ route('detail-product',$data->id) }}"><img src="{{ asset($data->picture) }}" alt=""/></a>
+            <a href="{{ route('detail-product',$data->id) }}"><img src="{{ asset($data->picture) }}" style="width:100px;height:100px" alt=""/></a>
           </div>
           <div class="caption">
             <h5>{{ $data->name }}</h5>

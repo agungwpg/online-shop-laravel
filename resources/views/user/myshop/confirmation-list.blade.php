@@ -33,6 +33,8 @@ My Products
                   <th>Transfer To</th>
                   <th>Amount</th>
                   <th>Payment Date</th>
+                  <th>Payment Invoice</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -44,6 +46,8 @@ My Products
                   <td>{{ $data->bank_account_name }}</td>
                   <td>{{ $data->reciever_bank }}</td>
                   <td>{{ $data->amount }}</td>
+                  <td>{{ $data->payment_date }}</td>
+                  <td><img src="{{ asset($data->invoice) }}" onclick="swipe()" height="200" width="150"/></td>
                   <td><a href="{{ route('c-action',[$data->id,'confirm']) }}" class="btn btn-xs btn-success">Confirm</a>
                   <a href="{{ route('c-action',[$data->id,'decline']) }}" class="btn btn-xs btn-danger">Decline</a></td>
                 </tr>
@@ -59,6 +63,18 @@ My Products
 @stop
 @section('custom_script')
 <script>
+
+19
+
+function swipe() {
+   var largeImage = document.getElementById('largeImage');
+   largeImage.style.display = 'block';
+   largeImage.style.width=200+"px";
+   largeImage.style.height=200+"px";
+   var url=largeImage.getAttribute('src');
+   window.open(url,'Image','width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
+}
+
 (function($){
   $(".alert-call").fadeOut(2500);
 })(jQuery);

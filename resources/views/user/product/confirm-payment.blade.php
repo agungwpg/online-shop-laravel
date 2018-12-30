@@ -26,7 +26,7 @@
 <button type="button" class="close" data-dismiss="alert">×</button>
 <strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
 </div> -->
-<form class="form-horizontal" method="post" action="{{ route('doconfirm') }}">
+<form class="form-horizontal" method="post" action="{{ route('doconfirm') }}" enctype="multipart/form-data">
   {{ csrf_field() }}
   <h4>Transaction Detail</h4>
 
@@ -64,6 +64,12 @@
     <label class="control-label" for="inputLnam">Payment Date<sup>*</sup></label>
     <div class="controls">
       <input type="date" name="date" required>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputLnam">Transfer Invoice<sup>*</sup></label>
+    <div class="controls">
+      <input type="file" name="invoice" required>
     </div>
   </div>
   <div class="control-group">

@@ -90,6 +90,10 @@ class ShopController extends Controller
 
     public function doconfirm(Request $r)
     {
+
+      $image = $r->invoice;
+      $image->move(public_path().'/user/invoice/',\App\Orders::max('id').'.jpg');
+
       $conf = new \App\Confirmation;
       $conf->id_order = $r->orderid;
       $conf->sender_bank = $r->sender;
@@ -98,6 +102,7 @@ class ShopController extends Controller
       $conf->amount = $r->amount;
       $conf->payment_date = $r->date;
       $conf->id_user = \Auth::user()->id;
+      $conf->invoice = 'user/invoice/'.\App\Orders::max('id').'.jpg';
       $conf->status = 0;
       $conf->resi = 0;
 

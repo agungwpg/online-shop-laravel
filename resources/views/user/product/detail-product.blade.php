@@ -80,7 +80,7 @@
               @foreach(\App\Products::where('id_category',$pr->id_category)->where('id','<>',$pr->id)->inRandomOrder()->take(6)->get() as $data)
               <li class="span3">
                 <div class="thumbnail">
-                  <a href="product_details.html"><img src="{{ asset($data->picture) }}" alt=""/></a>
+                  <a href="product_details.html"><img src="{{ asset($data->picture) }}" style="width:100px;height:100px" alt=""/></a>
                   <div class="caption">
                     <h5>{{ $data->name }}</h5>
                     <!-- <p>

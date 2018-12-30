@@ -8,7 +8,7 @@
       <li class="span3">
         <div class="thumbnail">
           <div style="width:100px;height:100px;margin-left: auto; margin-right: auto;">
-            <a href="{{ route('detail-product',$data->id) }}"><img src="{{ asset($data->picture) }}" alt=""/></a>
+            <a href="{{ route('detail-product',$data->id) }}"><img src="{{ asset($data->picture) }}" style="width:100px;height:100px" alt=""/></a>
           </div>
           <div class="caption">
             <h5>{{ $data->name }}</h5>
@@ -26,7 +26,7 @@
       @foreach(\App\Products::where('name','like','%'.$name.'%')->where('id_category',$category)->orderBy('created_at','desc')->get() as $data)
       <li class="span3">
         <div class="thumbnail">
-          <a href="product_details.html"><img src="{{ asset($data->picture) }}" alt=""/></a>
+          <a href="product_details.html"><img src="{{ asset($data->picture) }}" style="width:100px;height:100px" alt=""/></a>
           <div class="caption">
             <h5>{{ $data->name }}</h5>
             <p>{{ \App\Category::where('id',$data->id_category)->pluck('name')->first() }}</p>

@@ -82,6 +82,10 @@ Route::post('doconfirmpayment','ShopController@doconfirm')->name('doconfirm');
 Route::get('orderhistory',function(){
   return view('user.myshop.orderhistory');
 })->name('orderhistory');
+
+Route::get('orderhistorydetail/{id}',function($id){
+  return view('user.myshop.orderhistorydetail',compact('id'));
+});
 //-----------------------cashier-------------------
 
 Route::get('cashier',function(){
