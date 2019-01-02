@@ -182,4 +182,32 @@ class ShopController extends Controller
 
       \Cart::clear();
     }
+
+    public function refreshreport($month,$year)
+    {
+      $type = '0';
+      if($month == 0)
+      {
+        $type = '1';
+        $jan = \App\Orders::whereMonth('created_at','01')->whereYear('created_at',$year)->sum('total');
+        $feb = \App\Orders::whereMonth('created_at','02')->whereYear('created_at',$year)->sum('total');
+        $mar = \App\Orders::whereMonth('created_at','03')->whereYear('created_at',$year)->sum('total');
+        $apr = \App\Orders::whereMonth('created_at','04')->whereYear('created_at',$year)->sum('total');
+        $mei = \App\Orders::whereMonth('created_at','05')->whereYear('created_at',$year)->sum('total');
+        $jun = \App\Orders::whereMonth('created_at','06')->whereYear('created_at',$year)->sum('total');
+        $jul = \App\Orders::whereMonth('created_at','07')->whereYear('created_at',$year)->sum('total');
+        $ags = \App\Orders::whereMonth('created_at','08')->whereYear('created_at',$year)->sum('total');
+        $sep = \App\Orders::whereMonth('created_at','09')->whereYear('created_at',$year)->sum('total');
+        $okt = \App\Orders::whereMonth('created_at','10')->whereYear('created_at',$year)->sum('total');
+        $nov = \App\Orders::whereMonth('created_at','11')->whereYear('created_at',$year)->sum('total');
+        $des = \App\Orders::whereMonth('created_at','12')->whereYear('created_at',$year)->sum('total');
+
+        return view('user.myshop.refresh-report',compact('jan','feb','mar','apr','mei','jun','jul','ags','sep','okt','nov','des','type'));
+      }
+      else {
+        $type = '2';
+        $data = json_encode(\DB::table('order_details')->select(\DB::raw('sum(qty) as total, id_products'))->groupBy('id_products')->get());
+        return view('user.myshop.refresh-report',compact('data','type'));
+      }
+    }
 }

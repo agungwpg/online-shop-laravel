@@ -44,6 +44,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   @yield('custom_style')
 </head>
+@if(\Auth::user()->id_role == 1 || \Auth::user()->id_role == 3)
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
@@ -147,12 +148,12 @@
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="{{ route('showreport') }}">
             <i class="fa fa-files-o"></i>
             <span>Report</span>
           </a>
         </li>
-        @else
+        @elseif(\Auth::user()->id_role == 3)
         <li>
           <a href="{{ route('myshop-dashboard') }}">
             <i class="fa fa-files-o"></i>
@@ -236,4 +237,9 @@
 <script src="{{ asset('bower_components/admin-lte/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
 @yield('custom_script')
 </body>
+@else
+<body>
+  <p>Page Not Found</p>
+</body>
+@endif
 </html>

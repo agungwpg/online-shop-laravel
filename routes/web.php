@@ -86,6 +86,12 @@ Route::get('orderhistory',function(){
 Route::get('orderhistorydetail/{id}',function($id){
   return view('user.myshop.orderhistorydetail',compact('id'));
 });
+
+Route::get('showreport',function(){
+  return view('user.myshop.report');
+})->name("showreport");
+
+Route::get('refreshreport/{month}/{year}','ShopController@refreshreport');
 //-----------------------cashier-------------------
 
 Route::get('cashier',function(){
