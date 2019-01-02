@@ -93,7 +93,7 @@ Route::get('cashier',function(){
   return view('cashier.cashier');
 })->name('cashier');
 
-Route::get('transaction','ShopController@transaction')->name('transaction');
+Route::get('transaction','ShopController@checkoutcashier')->name('transaction');
 
 Route::post('deletecart/{id}','ShopController@deletecart')->name('deletecart');
 

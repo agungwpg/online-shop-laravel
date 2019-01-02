@@ -20,7 +20,13 @@ class UserController extends Controller
         'id_role' => 2
       ];
 
-      if(\Auth::attempt($authadmin))
+      $authpgw = [
+        'email' => $r->email,
+        'password' => $r->password,
+        'id_role' => 3
+      ];
+
+      if(\Auth::attempt($authadmin) || \Auth::attempt($authpgw))
       {
         return redirect()->route('myshop-dashboard');
       }

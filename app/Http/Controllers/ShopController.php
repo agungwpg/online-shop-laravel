@@ -140,4 +140,46 @@ class ShopController extends Controller
         return redirect()->back()->with('success-decline','set');
       }
     }
+
+    public function checkoutcashier()
+    {
+      $orders = new \App\Orders;
+      $orders->id_confirmation = date('Y').date('m').date('d').\App\Orders::max('id')+1;
+      $orders->code = 0;
+      $orders->weight_total = 0;
+      $orders->payment_deadline = date('Y-m-d');
+      $orders->payment_method = 'Cash';
+      $orders->user_id = 0;
+      $orders->fullname = 0;
+      $orders->phone_number = 0;
+      $orders->city = 0;
+      $orders->address = 0;
+      $orders->zip = 0;
+      $orders->status = 0;
+      $orders->service = 0;
+      $orders->ongkir = 0;
+      $orders->total = \Cart::getTotal();
+      $orders->save();
+
+      foreach(\Cart::getContent() as $data)
+      {
+        $detail = new \App\OrderDetail;
+        $detail->qty = $data->quantity;
+        $detail->id_order = \App\Orders::max('id');
+        $detail->discount_percent = 0;
+        $detail->net_price = \App\Products::where('id',$data->id)->pluck('netprice')->first()*$data->quantity;
+        $detail->id_products = $data->id;
+        $detail->save();
+      }
+
+      foreach(\App\OrderDetail::where('id_order',\App\Orders::max('id'))->get() as $data)
+      {
+
+        $prod = \App\Products::where('id',$data->id_products)->first();
+        $prod->stock = $prod->stock-$data->qty;
+        $prod->save();
+      }
+
+      \Cart::clear();
+    }
 }

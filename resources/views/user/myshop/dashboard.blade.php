@@ -34,7 +34,7 @@ My Products
                 </tr>
               </thead>
               <tbody>
-                @foreach(\App\Products::where('id_user',\Auth::user()->id)->get() as $data)
+                @foreach(\App\Products::all() as $data)
                 <tr>
                   <td>{{ $data->code }}</td>
                   <td>{{ $data->name }}</td>

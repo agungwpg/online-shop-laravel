@@ -152,29 +152,17 @@
             <span>Report</span>
           </a>
         </li>
+        @else
+        <li>
+          <a href="{{ route('myshop-dashboard') }}">
+            <i class="fa fa-files-o"></i>
+            <span>Products</span>
+          </a>
+        </li>
         <li>
           <a href="{{ route('cashier') }}">
             <i class="fa fa-files-o"></i>
             <span>Cashier</span>
-          </a>
-        </li>
-        @else
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>My Products</span>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fa fa-files-o"></i>
-            <span>My Report</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>My Orders</span>
           </a>
         </li>
         @endif
