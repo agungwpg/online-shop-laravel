@@ -4,10 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Role extends Model
 {
-  protected $table = 'categories';
+  protected $table = 'role';
   protected $primaryKey = 'id';
   protected $guarded = ['id'];
-  public $timestamps = false;
 }

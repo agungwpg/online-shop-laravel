@@ -1,7 +1,7 @@
 @extends('admin.component.master')
 
 @section('title')
-Data Jenis Barang
+Users
 @stop
 
 @section('content')
@@ -33,27 +33,23 @@ Data Jenis Barang
           <div class="col-md-12 tablehistori">
             <table class="table table-responsive table-bordered" id="tbl">
               <thead>
-                <th>Nama Jenis</th>
-                <th>All Size</th>
+                <th>Username</th>
+                <th>Fullname</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Role</th>
                 <th>Action</th>
               </thead>
               <tbody>
-                @foreach(\App\JenisBarang::where('id_clients',\Auth::user()->id_clients)->get() as $data)
+                @foreach(\App\User::where('id_role','<>',2)->get() as $data)
                 <tr>
-                  <td>{{ $data->nama }}</td>
-                  <td>
-                    @if($data->all_size == 0)
-                      Tidak
-                    @else
-                      Ya
-                    @endif
-                  </td>
-                  <td><button value="{{ $data->id }}" class="btn btn-sm btn-success btn-edit" data-nama="{{ $data->nama }}" data-allsize="{{ $data->all_size }}" data-toggle="modal" data-target="#edit">Edit</button>
-                  <a href="{{ route('deletejenisbarang',$data->id) }}" class="btn btn-sm btn-danger btn-delete">Hapus</a>
-                  <!-- <form class="formdelete_{{ $data->id }}" method="post" action="{{ route('deletejenisbarang',$data->id) }}">
-                    {{ csrf_field() }}
-                    {{ method_field('delete') }}
-                  </form> -->
+                  <td>{{ $data->email }}</td>
+                  <td>{{ $data->full_name }}</td>
+                  <td>{{ $data->address }}</td>
+                  <td>{{ $data->phone }}</td>
+                  <td>{{ \App\Role::where('id',$data->id_role)->pluck('role')->first() }}</td>
+                  <td><button value="{{ $data->id }}" class="btn btn-sm btn-success btn-edit" data-username="{{ $data->email }}" data-fullname="{{ $data->full_name }}" data-address="{{ $data->address }}" data-phone="{{ $data->phone }}" data-role="{{ $data->id_role }}" data-toggle="modal" data-target="#edit">Edit</button>
+                  <a href="{{ route('deleteusers',$data->id) }}" class="btn btn-sm btn-danger btn-delete">Hapus</a>
                 </td>
                 </tr>
                 @endforeach
@@ -73,26 +69,46 @@ Data Jenis Barang
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        Tambah Data Jenis Barang
+        Add Users
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form method="post" action="{{ route('tambahjenisbarang') }}">
+        <form method="post" action="{{ route('addusers') }}" enctype="multipart/form-data">
           {{ csrf_field() }}
           <div class="form-group">
-            <label>Nama Jenis: </label>
-            <input type="text" class="form-control" name="nama" required/>
+            <label>Username: </label>
+            <input type="text" class="form-control" name="username" required/>
           </div>
           <div class="form-group">
-            <label>All Size: </label>
-            <select class="form-control" name="allsize">
-              <option value="0">Tidak</option>
-              <option value="1">Ya</option>
+            <label>Password: </label>
+            <input type="text" class="form-control" name="password" required/>
+          </div>
+          <div class="form-group">
+            <label>Full Name: </label>
+            <input type="text" class="form-control" name="fullname" required/>
+          </div>
+          <div class="form-group">
+            <label>Address: </label>
+            <input type="text" class="form-control" name="address" required/>
+          </div>
+          <div class="form-group">
+            <label>Phone Number: </label>
+            <input type="text" class="form-control" name="phone" required/>
+          </div>
+          <div class="form-group">
+            <label>Role: </label>
+            <select class="form-control" name="role">
+              <option value="1">Admin</option>
+              <option value="3">Kasir</option>
             </select>
           </div>
+          <!-- <div class="form-group">
+            <label>Position: </label>
+            <input type="text" class="form-control" name="nama" required/>
+          </div> -->
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-sm btn-selesai">Tambah</button>
+        <button type="submit" class="btn btn-sm btn-selesai">Add</button>
       </div>
       </form>
     </div>
@@ -105,23 +121,39 @@ Data Jenis Barang
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        Edit Data Jenis Barang
+        Edit Users
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form method="post" action="{{ route('editjenisbarang') }}">
+        <form method="post" action="{{ route('editusers') }}" enctype="multipart/form-data">
           {{ csrf_field() }}
           {{ method_field('PUT') }}
           <input type="hidden" class="txtid" name="id">
           <div class="form-group">
-            <label>Nama Jenis: </label>
-            <input type="text" class="form-control txt-jenis" name="nama" required/>
+            <label>Username: </label>
+            <input type="text" class="form-control txt-username" name="username" required/>
           </div>
           <div class="form-group">
-            <label>All Size: </label>
-            <select class="form-control sel-allsize" name="allsize">
-              <option value="0">Tidak</option>
-              <option value="1">Ya</option>
+            <label>Password: </label>
+            <input type="text" class="form-control txt-password" name="password" />
+          </div>
+          <div class="form-group">
+            <label>Full Name: </label>
+            <input type="text" class="form-control txt-fullname" name="fullname" required/>
+          </div>
+          <div class="form-group">
+            <label>Address: </label>
+            <input type="text" class="form-control txt-address" name="address" required/>
+          </div>
+          <div class="form-group">
+            <label>Phone Number: </label>
+            <input type="text" class="form-control txt-phone" name="phone" required/>
+          </div>
+          <div class="form-group">
+            <label>Role: </label>
+            <select class="form-control sel-role" name="role">
+              <option value="1">Admin</option>
+              <option value="3">Kasir</option>
             </select>
           </div>
       </div>
@@ -151,22 +183,28 @@ function _confirm()
   // }
 }
 
-var idjb,nama,allsize;
+var id,nama,address,phone,full,role;
 
 $("#tbl").on('click','.btn-edit',function(){
-  idjb = $(this).val();
-  nama = $(this).data('nama');
-  allsize = $(this).data('allsize');
+  id = $(this).val();
+  nama = $(this).data('username');
+  address= $(this).data('address');
+  role= $(this).data('role');
+  phone= $(this).data('phone');
+  full= $(this).data('fullname');
 });
 
 $('#edit').on('show.bs.modal',function(){
-  $(".txtid").val(idjb);
-  $(".txt-jenis").val(nama);
-  $(".sel-allsize").val(allsize);
+  $(".txtid").val(id);
+  $(".txt-username").val(nama);
+  $(".txt-address").val(address);
+  $(".sel-role").val(role);
+  $(".txt-phone").val(phone);
+  $(".txt-fullname").val(full);
 });
 
 $("#tbl").on('click','.btn-delete',function(e){
-  var conf = confirm('apakah anda yakin ingin menghapus data ini ?');
+  var conf = confirm('are you sure want to delete this data ?');
   if(conf == false)
   {
     e.preventDefault();

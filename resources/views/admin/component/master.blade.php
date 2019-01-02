@@ -129,19 +129,19 @@
           </a>
         </li>
         <li>
-          <a href="">
+          <a href="{{ route('showslides') }}">
             <i class="fa fa-files-o"></i>
             <span>Slides</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('showusers') }}">
             <i class="fa fa-files-o"></i>
             <span>Users</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="{{ route('showcategory') }}">
             <i class="fa fa-files-o"></i>
             <span>Categories</span>
           </a>

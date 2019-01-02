@@ -96,3 +96,25 @@ Route::get('cashier',function(){
 Route::get('transaction','ShopController@transaction')->name('transaction');
 
 Route::post('deletecart/{id}','ShopController@deletecart')->name('deletecart');
+
+//-------------------content--------------------
+Route::get('showcategory',function(){
+    return view('admin.content.categories.showkategories');
+})->name('showcategory');
+Route::post('addcategory','ContentController@addcategory')->name('addcategory');
+Route::put('editcategory','ContentController@editcategory')->name('editcategory');
+Route::get('deletecategory/{id}','ContentController@deletecategory')->name('deletecategory');
+
+Route::get('showslides',function(){
+    return view('admin.content.slides.slides');
+})->name('showslides');
+Route::post('addslides','ContentController@addslides')->name('addslides');
+Route::put('editslides','ContentController@editslides')->name('editslides');
+Route::get('deleteslides/{id}','ContentController@deleteslides')->name('deleteslides');
+
+Route::get('showusers',function(){
+    return view('admin.content.users.users');
+})->name('showusers');
+Route::post('addusers','ContentController@addusers')->name('addusers');
+Route::put('editusers','ContentController@editusers')->name('editusers');
+Route::get('deleteusers/{id}','ContentController@deleteusers')->name('deleteusers');
