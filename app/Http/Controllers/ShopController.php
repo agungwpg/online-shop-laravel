@@ -30,18 +30,24 @@ class ShopController extends Controller
 
     public function cartAction($action,$id,$jumlah)
     {
-      if($action == 'minus')
-      {
-        \Cart::update($id,[
-          'quantity' => -1
-        ]);
-      }
-      else
-      {
-        \Cart::update($id,[
-          'quantity' => +1
-        ]);
-      }
+        if($action == 'minus')
+        {
+          \Cart::update($id,[
+            'quantity' => -1
+          ]);
+        }
+        else
+        {
+          if($jumlah >= \App\Products::where('id',$id)->pluck('stock')->first())
+          {
+            return redirect()->back()->with('error-add','set');
+          }
+          else {
+            \Cart::update($id,[
+              'quantity' => +1
+            ]);
+          }
+        }
     }
 
     public function doOrder(Request $r)
@@ -206,7 +212,10 @@ class ShopController extends Controller
       }
       else {
         $type = '2';
-        $data = json_encode(\DB::table('order_details')->select(\DB::raw('sum(qty) as total, id_products'))->groupBy('id_products')->get());
+        $data = json_encode(\DB::table('order_details')->select(\DB::raw('sum(order_details.qty) as total, products.name as name'))
+                ->join('products','order_details.id_products','=','products.id')
+                ->whereMonth('created_at',$month)->whereYear('created_at',$year)
+                ->take(10)->groupBy('products.name')->get());
         return view('user.myshop.refresh-report',compact('data','type'));
       }
     }

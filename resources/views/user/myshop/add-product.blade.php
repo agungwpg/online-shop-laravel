@@ -64,7 +64,7 @@ Add Products
             </div>
             <div class="form-group">
               <div class="col-md-3">
-                <button type="button" class="btn btn-success btn-block btn-md btn-tambah">Submit</button>
+                <button type="submit" class="btn btn-success btn-block btn-md btn-tambah">Submit</button>
               </div>
             </div>
           </form>
@@ -97,13 +97,17 @@ $("#imgInp").change(function(){
     readURL(this);
 });
 
-$(".btn-tambah").click(function(){
-  var conf = confirm("Are you sure to add this product to your product list");
+// $(".btn-tambah").click(function(){
+//   var conf = confirm("Are you sure to add this product to your product list");
+//
+//   if(conf == true)
+//   {
+//     $("#formtambah").submit();
+//   }
+// });
 
-  if(conf == true)
-  {
-    $("#formtambah").submit();
-  }
-});
+// $("#formtambah").submit(function(){
+//
+// });
 </script>
 @stop

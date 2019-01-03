@@ -1,6 +1,6 @@
 @extends('admin.component.master')
 @section('title')
-My Products
+Report
 @stop
 
 @section('content')

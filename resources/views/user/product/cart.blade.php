@@ -1,6 +1,10 @@
 @extends('user.component.master-user')
 @section('content')
-
+@if(Session::has('error-add'))
+  <script>
+    alert("Insufficient Stock");
+  </script>
+@endif
 <div class="span9">
 
   <ul class="breadcrumb">

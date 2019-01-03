@@ -70,10 +70,9 @@ var data = JSON.parse('{{ $data }}'.replace(/&quot;/g, '"'));
 var qty = [];
 var prod= [];
 var ctx = document.getElementById("myChart").getContext('2d');
-
 data.forEach(function(data) {
   qty.push(parseInt(data.total));
-  prod.push(data.id_products.toString());
+  prod.push(data.name);
 });
 console.log(qty);
 console.log(prod);
@@ -129,7 +128,7 @@ var myChart = new Chart(ctx, {
     tooltips: {
       callbacks: {
         label: function(tooltipItem, data) {
-          return "Sold Quantity : " + tooltipItem.yLabel + 'pc(s)';
+          return "Sold Quantity : " + tooltipItem.yLabel + ' pc(s)';
         },
       }
     }

@@ -6,7 +6,7 @@
     @if($category == 0)
 
     @else
-      @foreach(\App\Products::where('id_category',$category)->orderBy('created_at','desc')->get() as $data)
+      @foreach(\App\Products::where('id_category',$category)->orderBy('id','desc')->get() as $data)
       <li class="span3">
         <div class="thumbnail">
           <div style="width:100px;height:100px;margin-left: auto; margin-right: auto;">

@@ -1,5 +1,10 @@
 @extends('user.component.master-user')
 @section('content')
+@if(Session::has('error-add'))
+  <script>
+    alert("Insufficient Stock");
+  </script>
+@endif
 <div class="span9">
   <ul class="breadcrumb">
     <li><a href="index.html">Home</a> <span class="divider">/</span></li>
@@ -49,7 +54,7 @@
         <label class="control-label"><span>Rp {{ number_format($pr->netprice) }} / item</span></label>
         <input type="hidden" name="price" value="{{ $pr->netprice }}">
         <div class="controls">
-          <input type="number" name="qty" class="span1 txt-qty" placeholder="Qty."/>
+          <input type="number" name="qty" value="1" class="span1 txt-qty" placeholder="Qty."/>
           <button type="button" class="btn btn-large btn-primary pull-right btn-add-cart"> Add to cart <i class=" icon-shopping-cart"></i></button>
         </div>
       </div>
@@ -118,7 +123,6 @@ $(".btn-add-cart").click(function(){
 
     if(conf == true)
     {
-      alert("item added to cart");
       $(".qtyFrm").submit();
     }
   }

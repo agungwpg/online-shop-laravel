@@ -69,27 +69,36 @@ class ProductController extends Controller
 
     public function addcart(Request $r,$id)
     {
-      if(!\Cart::get($id))
+
+      if($r->qty>\App\Products::where('id',$id)->pluck('stock')->first())
       {
-        \Cart::add([
-          'id' => $id,
-          'name' => \App\Products::where('id',$id)->pluck('name')->first(),
-          'price' => \App\Products::where('id',$id)->pluck('netprice')->first(),
-          'quantity' => $r->qty,
-          'attributed' => [
-            'subtotal' => $r->price * $r->qty,
-          ],
-        ]);
+        return redirect()->back()->with('error-add','set');
       }
       else {
-        \Cart::update($id,[
-          'quantity' => $r->qty,
-          'attributed' => [
-            'subtotal' => $r->price * $r->qty,
-          ],
-        ]);
+        if(!\Cart::get($id))
+        {
+          \Cart::add([
+            'id' => $id,
+            'name' => \App\Products::where('id',$id)->pluck('name')->first(),
+            'price' => \App\Products::where('id',$id)->pluck('netprice')->first(),
+            'quantity' => $r->qty,
+            'attributed' => [
+              'subtotal' => $r->price * $r->qty,
+            ],
+          ]);
+        }
+        else {
+          \Cart::update($id,[
+            'quantity' => $r->qty,
+            'attributed' => [
+              'subtotal' => $r->price * $r->qty,
+            ],
+          ]);
+        }
+        return redirect()->back();
       }
-      return redirect()->back();
+
+
     }
 
 

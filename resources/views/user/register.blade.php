@@ -57,7 +57,7 @@
   <div class="control-group">
     <label class="control-label" for="inputLnam">Phone Number<sup>*</sup></label>
     <div class="controls">
-      <input type="text" placeholder="Phone Number" name="phone" required>
+      <input type="number" placeholder="Phone Number" name="phone" required>
     </div>
   </div>
   <div class="control-group">

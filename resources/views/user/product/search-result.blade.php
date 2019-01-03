@@ -4,7 +4,7 @@
   <h4>Search Result </h4>
   <ul class="thumbnails">
     @if($category == 0)
-      @foreach(\App\Products::where('name','like','%'.$name.'%')->orderBy('created_at','desc')->get() as $data)
+      @foreach(\App\Products::where('name','like','%'.$name.'%')->orderBy('id','desc')->get() as $data)
       <li class="span3">
         <div class="thumbnail">
           <div style="width:100px;height:100px;margin-left: auto; margin-right: auto;">
@@ -23,7 +23,7 @@
       </li>
       @endforeach
     @else
-      @foreach(\App\Products::where('name','like','%'.$name.'%')->where('id_category',$category)->orderBy('created_at','desc')->get() as $data)
+      @foreach(\App\Products::where('name','like','%'.$name.'%')->where('id_category',$category)->orderBy('id','desc')->get() as $data)
       <li class="span3">
         <div class="thumbnail">
           <a href="product_details.html"><img src="{{ asset($data->picture) }}" style="width:100px;height:100px" alt=""/></a>
